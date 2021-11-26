@@ -8,7 +8,7 @@ resources:
   repositories:
     - repository: odidev
       type: github
-      endpoint: MyContosoServiceConnection
+      endpoint: github
       name: odidev/azure-pipeline-templates
       ref: refs/tags/v2.2.0
 
