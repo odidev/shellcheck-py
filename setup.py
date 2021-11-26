@@ -8,6 +8,7 @@ import sys
 import tarfile
 import urllib.request
 import zipfile
+import platform
 from distutils.command.build import build as orig_build
 from distutils.core import Command
 from typing import Tuple
@@ -18,6 +19,10 @@ from setuptools.command.install import install as orig_install
 SHELLCHECK_VERSION = '0.7.2'
 POSTFIX_SHA256 = {
     # TODO(rhee): detect "linux.aarch64" and "linux.armv6hf"
+    'linuxaarch64': (
+        'linux.aarch64.tar.xz',
+        'a12bdfe0f95811ad6c0a091006b919b2834b0619b460cfa596f557edd62e45ab',
+    ),
     'linux': (
         'linux.x86_64.tar.xz',
         '70423609f27b504d6c0c47e340f33652aea975e45f312324f2dbf91c95a3b188',
@@ -35,7 +40,10 @@ PY_VERSION = '1'
 
 
 def get_download_url() -> Tuple[str, str]:
-    postfix, sha256 = POSTFIX_SHA256[sys.platform]
+    if platform.machine() == 'aarch64':
+        postfix, sha256 = POSTFIX_SHA256['linuxaarch64']
+    else:
+        postfix, sha256 = POSTFIX_SHA256[sys.platform]
     url = (
         f'https://github.com/koalaman/shellcheck/releases/download/'
         f'v{SHELLCHECK_VERSION}/shellcheck-v{SHELLCHECK_VERSION}.{postfix}'
