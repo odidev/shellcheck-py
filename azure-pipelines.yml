@@ -30,7 +30,7 @@ jobs:
     toxenvs: [py38]
     os: linux
     coverage: false
-BuildManylinuxWheels:
+- BuildManylinuxWheels:
   steps:
       - uses: actions/checkout@v2
         with:
