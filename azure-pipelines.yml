@@ -13,23 +13,6 @@ resources:
       ref: refs/tags/v2.2.0
 
 jobs:
-- template: job--python-tox.yml@odidev
-  parameters:
-    toxenvs: [py38]
-    os: windows
-    coverage: false
-    wheel_tags: true
-- template: job--python-tox.yml@odidev
-  parameters:
-    toxenvs: [py38]
-    os: macos
-    coverage: false
-    wheel_tags: true
-- template: job--python-tox.yml@odidev
-  parameters:
-    toxenvs: [py38]
-    os: linux
-    coverage: false
 - job: BuildManylinuxWheels
   pool:
     vmImage: ubuntu-18.04
