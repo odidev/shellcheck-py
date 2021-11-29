@@ -47,7 +47,7 @@ jobs:
       source .env/bin/activate && \
       pip install --upgrade pip wheel && \
       pip wheel --no-deps . -w wheels && \
-      for WHL in target/wheels/*whl; do auditwheel repair ${WHL}; done && \
+      for WHL in wheels/*whl; do auditwheel repair ${WHL}; done && \
       deactivate'
     displayName: Build Wheel
      
