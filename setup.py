@@ -41,7 +41,7 @@ PY_VERSION = '1'
 
 def get_download_url() -> Tuple[str, str]:
     if platform.machine() == 'aarch64':
-        postfix, sha256 = POSTFIX_SHA256[linuxaarch64]
+        postfix, sha256 = POSTFIX_SHA256['linuxaarch64']
     else:
         postfix, sha256 = POSTFIX_SHA256[sys.platform]
     url = (
