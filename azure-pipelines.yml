@@ -35,19 +35,16 @@ jobs:
   strategy:
     matrix:
       pyver: [cp39-cp39]
-  runs-on: ubuntu-latest
-  env:
+  pool:
+    vmImage: ubuntu-18.04
+  variables:
     py: /opt/python/${{ matrix.pyver }}/bin/python
     img: quay.io/pypa/manylinux2014_aarch64
   steps:
-  - name: Checkout
-    uses: actions/checkout@v2
-    with:
-            submodules: recursive
-  - name: Set up QEMU
-    uses: docker/setup-qemu-action@v1
-  - name: Build Wheel
-    run: |
+  - script: |
+      docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+  displayName: Set up QEMU
+  - script: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         ${{ env.img }} \
         bash -exc '${{ env.py }} -m venv .env && \
@@ -59,6 +56,8 @@ jobs:
       #- uses: actions/upload-artifact@v2
       #  with:
       #    path: ./wheels/*.whl
+  displayName: Build Wheel
+     
   - task: PublishBuildArtifacts@1
     #condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
     inputs:
