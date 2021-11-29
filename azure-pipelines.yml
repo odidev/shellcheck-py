@@ -33,9 +33,10 @@ jobs:
       for WHL in wheels/*whl; do auditwheel repair ${WHL}; done && \
       deactivate'
     displayName: Build Wheel
+    condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
      
   - task: PublishBuildArtifacts@1
-    #condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
+    condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
     inputs:
       pathToPublish: wheels
       artifactName: wheel_linux_aarch64
