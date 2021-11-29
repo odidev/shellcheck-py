@@ -33,7 +33,7 @@ jobs:
 - job: BuildManylinuxWheels
   strategy:
     matrix:
-      pyver: 'cp39-cp39'
+      pyver: ['cp39-cp39']
   pool:
     vmImage: ubuntu-18.04
   variables:
