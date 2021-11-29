@@ -42,8 +42,8 @@ jobs:
     displayName: Set up QEMU
   - script: |
       docker run --rm -v .:/ws:rw --workdir=/ws \
-      ${{ env.img }} \
-      bash -exc '${{ env.py }} -m venv .env && \
+      $(img) \
+      bash -exc '$(py) -m venv .env && \
       source .env/bin/activate && \
       pip install --upgrade pip && \
       pip wheel --no-deps . -w wheels && \
