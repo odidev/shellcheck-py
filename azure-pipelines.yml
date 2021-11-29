@@ -32,7 +32,7 @@ jobs:
     coverage: false
 - job: BuildManylinuxWheels
   displayName: "Build Manylinux AArch64 Wheels"
-    steps:
+  - steps:
       - uses: actions/checkout@v2
         with:
             submodules: recursive
