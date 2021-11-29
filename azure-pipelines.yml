@@ -34,7 +34,7 @@ jobs:
   displayName: "Build Manylinux AArch64 Wheels"
   strategy:
     matrix:
-      pyver: 'cp39-cp39'
+      pyver: '3.9'
   pool:
     vmImage: ubuntu-18.04
   variables:
