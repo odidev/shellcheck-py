@@ -30,8 +30,9 @@ jobs:
     toxenvs: [py38]
     os: linux
     coverage: false
-#- BuildManylinuxWheels:
-- steps:
+- job: BuildManylinuxWheels
+  displayName: "Build Manylinux AArch64 Wheels"
+    steps:
       - uses: actions/checkout@v2
         with:
             submodules: recursive
