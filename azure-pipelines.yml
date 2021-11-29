@@ -43,20 +43,17 @@ jobs:
   steps:
   - script: |
       docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-  displayName: Set up QEMU
+    displayName: Set up QEMU
   - script: |
-        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
-        ${{ env.img }} \
-        bash -exc '${{ env.py }} -m venv .env && \
-        source .env/bin/activate && \
-        pip install --upgrade pip && \
-        pip wheel --no-deps . -w wheels && \
-        for WHL in target/wheels/*whl; do auditwheel repair ${WHL}; done && \
-        deactivate'
-      #- uses: actions/upload-artifact@v2
-      #  with:
-      #    path: ./wheels/*.whl
-  displayName: Build Wheel
+      docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+      ${{ env.img }} \
+      bash -exc '${{ env.py }} -m venv .env && \
+      source .env/bin/activate && \
+      pip install --upgrade pip && \
+      pip wheel --no-deps . -w wheels && \
+      for WHL in target/wheels/*whl; do auditwheel repair ${WHL}; done && \
+      deactivate'
+    displayName: Build Wheel
      
   - task: PublishBuildArtifacts@1
     #condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
