@@ -31,13 +31,10 @@ jobs:
     os: linux
     coverage: false
 - job: BuildManylinuxWheels
-  strategy:
-    matrix:
-      pyver: ['cp39-cp39']
   pool:
     vmImage: ubuntu-18.04
   variables:
-    py: /opt/python/${{ matrix.pyver }}/bin/python
+    py: /opt/python/cp38*/bin/python
     img: quay.io/pypa/manylinux2014_aarch64
   steps:
   - script: |
