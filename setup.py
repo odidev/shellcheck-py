@@ -41,9 +41,9 @@ PY_VERSION = '1'
 
 def get_download_url() -> Tuple[str, str]:
     if platform.machine() == 'aarch64':
-        postfix, sha256 = POSTFIX_SHA256[sys.platform]
-    else:
         postfix, sha256 = POSTFIX_SHA256[linuxaarch64]
+    else:
+        postfix, sha256 = POSTFIX_SHA256[sys.platform]
     url = (
         f'https://github.com/koalaman/shellcheck/releases/download/'
         f'v{SHELLCHECK_VERSION}/shellcheck-v{SHELLCHECK_VERSION}.{postfix}'
