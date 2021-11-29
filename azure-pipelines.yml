@@ -34,14 +34,14 @@ jobs:
   pool:
     vmImage: ubuntu-18.04
   variables:
-    py: /opt/python/cp38*/bin/python
+    py: /opt/python/cp38-cp38/bin/python
     img: quay.io/pypa/manylinux2014_aarch64
   steps:
   - script: |
       docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
     displayName: Set up QEMU
   - script: |
-      docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+      docker run --rm -v .:/ws:rw --workdir=/ws \
       ${{ env.img }} \
       bash -exc '${{ env.py }} -m venv .env && \
       source .env/bin/activate && \
